@@ -6,7 +6,7 @@ class AutoCompleteTextFieldWidget extends StatefulWidget {
   final bool isMandatory;
   final IconData iconData;
   final String hint;
-
+  final String? savedText;
   final void Function(String newValue) onChange;
 
   AutoCompleteTextFieldWidget(
@@ -15,7 +15,7 @@ class AutoCompleteTextFieldWidget extends StatefulWidget {
       required this.isMandatory,
       required this.iconData,
       required this.hint,
-      required this.onChange});
+      required this.onChange, this.savedText});
 
   @override
   _AutoCompleteTextFieldState createState() => _AutoCompleteTextFieldState();
@@ -31,6 +31,7 @@ class _AutoCompleteTextFieldState extends State<AutoCompleteTextFieldWidget> {
   void initState() {
     super.initState();
     _textEditingController.addListener(_updateClearIconVisibility);
+    _textEditingController.text = widget.savedText!;
   }
 
   @override

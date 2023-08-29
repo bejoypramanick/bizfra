@@ -31,6 +31,9 @@ class PhotoTakenEvent extends RegistrationEvent {
   PhotoTakenEvent(this.photo);
 }
 
-class SummaryDetailsLoadedEvent extends RegistrationEvent {
-  SummaryDetailsLoadedEvent();
+class SummaryDetailsUpdatedEvent extends RegistrationEvent {
+  SummaryDetailsUpdatedEvent();
+  
 }
+
+

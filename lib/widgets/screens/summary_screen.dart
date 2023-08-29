@@ -6,7 +6,9 @@ import 'package:flutter_pdfview/flutter_pdfview.dart';
 import '../../bloc/registration_bloc.dart';
 import '../../bloc/registration_state.dart';
 import '../../models/documents_model.dart';
+import '../buttons/back_button_widget.dart';
 import '../buttons/next_button_widget.dart';
+import '../buttons/submit_button_widget.dart';
 import '../header/header_title_padding_widget.dart';
 
 class SummaryDetailsScreenWidget extends StatelessWidget {
@@ -14,7 +16,7 @@ class SummaryDetailsScreenWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final registrationBloc = BlocProvider.of<RegistrationBloc>(context);
+
     return Scaffold(
       // appBar: HeaderWidget(),
 
@@ -146,10 +148,14 @@ class SummaryDetailsScreenWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               // BackButtonWidget(onPressed: navigateBack),
-              NextButtonWidget(onPressed: () {
+              BackButtonWidget(onPressed: (){
+                Navigator.of(context).pop();
+              }),
+              SubmitButtonWidget(onPressed: () {
 
 
               })
+
             ],
           ),
         )

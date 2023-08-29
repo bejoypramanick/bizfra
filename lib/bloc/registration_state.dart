@@ -46,4 +46,8 @@ class SummaryState extends RegistrationState {
     required this.documents,
     required this.photoModel,
   });
+
+
 }
+
+

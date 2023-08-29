@@ -14,6 +14,7 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
   late BusinessModel _businessModel;
   late DocumentsModel _documentsModel;
   late PhotoModel _photoModel;
+  late String text;
 
   RegistrationBloc() : super(RegistrationInitialState()) {
     on<UserSubmittedEvent>((event, emit) {
@@ -40,7 +41,7 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
       _photoModel = event.photo;
       emit(PhotoUploadState(event.photo)); // Emit the corresponding state
     });
-    on<SummaryDetailsLoadedEvent>((event, emit) {
+    on<SummaryDetailsUpdatedEvent>((event, emit) {
       // Handle document submission and emit state
       emit(SummaryState(
           user: _userModel,
@@ -48,5 +49,6 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
           documents: _documentsModel,
           photoModel: _photoModel)); // Emit the corresponding state
     });
+
   }
 }

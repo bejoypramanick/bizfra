@@ -1,5 +1,3 @@
-
-
 import 'dart:typed_data';
 import 'package:file_picker/file_picker.dart';
 
@@ -13,6 +11,9 @@ class DocumentsModel {
   final FileType aadharFileType;
   final FileType panFileType;
   final FileType gstFileType;
+  final String aadharFileName;
+  final String panFileName;
+  final String gstFileName;
 
   DocumentsModel(
       {required this.aadharNumber,
@@ -23,6 +24,9 @@ class DocumentsModel {
       required this.gstData,
       required this.aadharFileType,
       required this.panFileType,
-      required this.gstFileType});
+      required this.gstFileType,
+      required this.aadharFileName,
+      required this.panFileName,
+      required this.gstFileName});
 // You can add file paths for document uploads here
 }

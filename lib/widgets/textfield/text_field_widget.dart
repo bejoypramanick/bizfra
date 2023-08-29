@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class TextFieldWidget extends StatefulWidget {
   TextFieldWidget(
@@ -7,13 +8,14 @@ class TextFieldWidget extends StatefulWidget {
       required this.iconData,
       required this.isMandatory,
       required this.onChange,
-      required this.onValidate});
+      required this.onValidate, this.savedText});
 
   final String hintText;
   final IconData iconData;
   final bool isMandatory;
   final void Function(String newValue) onChange;
   final String? Function(String newValue) onValidate;
+  final String? savedText;
 
   @override
   _ClearableTextFieldState createState() => _ClearableTextFieldState();
@@ -27,6 +29,7 @@ class _ClearableTextFieldState extends State<TextFieldWidget> {
   void initState() {
     super.initState();
     _textEditingController.addListener(_updateClearIconVisibility);
+    _textEditingController.text = widget.savedText!;
   }
 
   @override
@@ -52,6 +55,7 @@ class _ClearableTextFieldState extends State<TextFieldWidget> {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: _textEditingController,
+
       /*onEditingComplete: () {
         widget.onChange(_textEditingController.text);
       },*/

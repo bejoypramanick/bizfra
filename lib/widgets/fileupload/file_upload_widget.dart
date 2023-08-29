@@ -5,17 +5,17 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class FileUploadWidget extends StatefulWidget {
-  FileUploadWidget({super.key, required this.onUploadSuccess});
+  FileUploadWidget({super.key, required this.onUploadSuccess, this.selectedFile});
 
-  final void Function(Uint8List? data, FileType fileType) onUploadSuccess;
+  final void Function(Uint8List? data, FileType fileType, String fileName) onUploadSuccess;
   FileType fileType = FileType.any;
-
+  PlatformFile? selectedFile;
   @override
   _FileUploadWidgetState createState() => _FileUploadWidgetState();
 }
 
 class _FileUploadWidgetState extends State<FileUploadWidget> {
-  List<PlatformFile> selectedFiles = [];
+
 
   Future<void> pickFiles() async {
     try {
@@ -25,18 +25,19 @@ class _FileUploadWidgetState extends State<FileUploadWidget> {
       );
 
       if (result != null) {
-        selectedFiles = result.files;
+        widget.selectedFile = result.files.single;
         widget.fileType = _determineFileType(result.files.single.name);
-        if (selectedFiles.single.bytes != null) { //chrome web
+        if (widget.selectedFile?.bytes != null) { //chrome web
           setState(() {
-            widget.onUploadSuccess(selectedFiles.single.bytes, widget.fileType);
+            widget.onUploadSuccess(widget.selectedFile?.bytes, widget.fileType, widget.selectedFile!.name);
           });
         } else {
-          File file =  File(result.files.single.path!);
+          widget.selectedFile = result.files.single;
+          File file =  File(  widget.selectedFile!.path!);
           List<int> fileBytes = await file.readAsBytes();
           Uint8List bytes = Uint8List.fromList(fileBytes);
           setState(()   { //mobile
-            widget.onUploadSuccess(bytes, widget.fileType);
+            widget.onUploadSuccess(bytes, widget.fileType, widget.selectedFile!.name);
           });
         }
       }
@@ -58,7 +59,7 @@ class _FileUploadWidgetState extends State<FileUploadWidget> {
           SizedBox(height: 16),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [ selectedFiles != null && selectedFiles.isNotEmpty && selectedFiles.single != null? Text('File: ${selectedFiles.single.name}') :Text('') ]
+            children: [ widget.selectedFile  != null  ? Text('File: ${widget.selectedFile?.name}') :const Text('') ]
           ),
         ],
       ),

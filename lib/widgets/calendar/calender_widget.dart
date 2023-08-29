@@ -6,12 +6,12 @@ class CalenderWidget extends StatefulWidget {
       {super.key,
       required this.isMandatory,
       required this.onChange,
-      required this.onValidate});
+      required this.onValidate, this.savedText});
 
   final bool isMandatory;
   final void Function(String newValue) onChange;
   final String? Function(String newValue) onValidate;
-
+  final String? savedText;
   @override
   _DatePickerTextFieldState createState() => _DatePickerTextFieldState();
 }
@@ -40,7 +40,12 @@ class _DatePickerTextFieldState extends State<CalenderWidget> {
       });
     }
   }
+  @override
+  void initState() {
+    super.initState();
 
+    _dateController.text = widget.savedText!;
+  }
   void _clearDate() {
     setState(() {
       _selectedDate = null;
