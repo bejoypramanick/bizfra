@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'button_sized_box_widget.dart';
 
 class NextButtonWidget extends StatelessWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onButtonClicked;
 
-  const NextButtonWidget({super.key, required this.onPressed});
+  const NextButtonWidget({super.key,  this.onButtonClicked});
 
   @override
   Widget build(BuildContext context) {
-    return ButtonSizedBoxWidget(onPressed: onPressed, buttonTxt: 'NEXT');
+    return ButtonSizedBoxWidget(onButtonPressed: onButtonClicked, buttonTxt: 'NEXT');
   }
 }

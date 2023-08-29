@@ -2,12 +2,12 @@ import 'package:bizfra/widgets/buttons/button_sized_box_widget.dart';
 import 'package:flutter/material.dart';
 
 class BackButtonWidget extends StatelessWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onButtonClicked;
 
-  const BackButtonWidget({super.key, required this.onPressed});
+  const BackButtonWidget({super.key,  this.onButtonClicked});
 
   @override
   Widget build(BuildContext context) {
-    return ButtonSizedBoxWidget(onPressed: onPressed, buttonTxt: 'BACK');
+    return ButtonSizedBoxWidget(onButtonPressed: onButtonClicked, buttonTxt: 'BACK');
   }
 }

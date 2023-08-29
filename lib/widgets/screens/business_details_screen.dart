@@ -10,11 +10,13 @@ import '../../bloc/registration_bloc.dart';
 import '../../bloc/registration_state.dart';
 import '../../data/business_expertise.dart';
 import '../../data/organization_types.dart';
+import '../../helper/EventHelper.dart';
 import '../../validation/FieldValidator.dart';
 import '../buttons/back_button_widget.dart';
 import '../buttons/next_button_widget.dart';
 import '../container/container_widget.dart';
 import '../header/header_title_padding_widget.dart';
+import '../navigation/nav_bar_widget.dart';
 
 class BusinessDetailsScreenWidget extends StatefulWidget {
   BusinessDetailsScreenWidget(registrationBloc, {super.key});
@@ -98,29 +100,16 @@ class _BusinessDetailsScreenWidgetState
                     onValidate: FieldValidator.validateBranches,
                     savedText: widget.noOfbranches))
           ]))),
-          bottomNavigationBar: BottomAppBar(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                // BackButtonWidget(onPressed: navigateBack),
-                BackButtonWidget(onPressed: () {
-                  //Navigator.of(context).pop();
-                  Navigator.pushNamed(context, '/userDetails');
-                }),
-                NextButtonWidget(onPressed: () {
-                  BusinessModel businessModel = BusinessModel(
-                      orgName: widget.orgName,
-                      orgType: widget.orgType,
-                      expertise: widget.expertise,
-                      address: widget.address,
-                      branches: widget.noOfbranches,
-                      website: widget.website);
-                  registrationBloc.add(BusinessSubmittedEvent(businessModel));
-                  Navigator.pushNamed(context, '/documentsUpload');
-                })
-              ],
-            ),
-          ));
+          bottomNavigationBar:
+              BottomNavBarWidget(backButtonWidget: BackButtonWidget(
+            onButtonClicked: () {
+              EventHelper.businessScreenBackButtonClicked(context);
+            },
+          ), nextButtonWidget: NextButtonWidget(onButtonClicked: () {
+            EventHelper.businessScreenNextButtonClicked(
+                registrationBloc, context, widget);
+          }))
+      );
     });
   }
 

@@ -9,8 +9,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/registration_bloc.dart';
 import '../../bloc/registration_state.dart';
+import '../../helper/EventHelper.dart';
 import '../buttons/back_button_widget.dart';
+import '../buttons/camera_button_widget.dart';
 import '../buttons/next_button_widget.dart';
+import '../navigation/nav_bar_widget.dart';
 
 class CameraWidget extends StatefulWidget {
   CameraWidget(RegistrationBloc registrationBloc, {super.key});
@@ -96,17 +99,14 @@ class _CameraWidgetState extends State<CameraWidget> {
                 Container(
                   height: 400,
                   width: 400,
+                  padding: EdgeInsets.all(30),
                   child: controller == null
                       ? Center(child: Text("Loading Camera..."))
                       : !controller!.value.isInitialized
                           ? Center(child: CircularProgressIndicator())
                           : CameraPreview(controller!),
                 ),
-                ElevatedButton.icon(
-                  onPressed: takePicture,
-                  icon: Icon(Icons.camera),
-                  label: Text("Capture"),
-                ),
+                CameraButtonWidget(onPressed: takePicture),
                 Container(
                   padding: EdgeInsets.all(30),
                   child: widget.photoData != null
@@ -117,24 +117,17 @@ class _CameraWidgetState extends State<CameraWidget> {
             ),
           ),
         ),
-        bottomNavigationBar: BottomAppBar(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              BackButtonWidget(onPressed: () {
-                //Navigator.of(context).pop();
-                Navigator.pushNamed(context, '/documentsUpload');
-              }),
-              NextButtonWidget(onPressed: () {
-                final photoModel =
-                PhotoModel(photoData: widget?.photoData ?? Uint8List(0) );
-                registrationBloc.add(PhotoTakenEvent(photoModel));
-                Navigator.pushNamed(context, '/summaryDetails');
-              })
-            ],
-          ),
-        ),
-      );
+
+          bottomNavigationBar:
+          BottomNavBarWidget(backButtonWidget: BackButtonWidget(
+            onButtonClicked: () {
+              EventHelper.photoScreenBackButtonClicked(context);
+            },
+          ), nextButtonWidget: NextButtonWidget(onButtonClicked: () {
+            EventHelper.photoScreenNextButtonClicked(
+                registrationBloc, context, widget);
+          })));
+
     });
   }
 

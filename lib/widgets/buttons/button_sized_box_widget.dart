@@ -2,11 +2,11 @@ import 'package:bizfra/widgets/styles/nav_button_style.dart';
 import 'package:flutter/material.dart';
 
 class ButtonSizedBoxWidget extends StatelessWidget {
-  final VoidCallback onPressed;
+  final VoidCallback? onButtonPressed;
   String buttonTxt;
 
   ButtonSizedBoxWidget(
-      {super.key, required this.onPressed, required this.buttonTxt});
+      {super.key,  this.onButtonPressed, required this.buttonTxt});
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +14,7 @@ class ButtonSizedBoxWidget extends StatelessWidget {
         width: 120.0,
         height: 50.0,
         child: OutlinedButton(
-            onPressed: () {
-              onPressed();
-            },
+            onPressed: onButtonPressed,
             style: NavButtonStyle.outlinedButtonStyle,
             child: Text(buttonTxt, style: NavButtonStyle.buttonText)));
   }
