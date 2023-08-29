@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:bizfra/bloc/registration_event.dart';
+import 'package:bizfra/helper/ImageHelper.dart';
 import 'package:bizfra/models/photo_model.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -96,23 +97,9 @@ class _CameraWidgetState extends State<CameraWidget> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Container(
-                  height: 400,
-                  width: 400,
-                  padding: EdgeInsets.all(30),
-                  child: controller == null
-                      ? Center(child: Text("Loading Camera..."))
-                      : !controller!.value.isInitialized
-                          ? Center(child: CircularProgressIndicator())
-                          : CameraPreview(controller!),
-                ),
+                ImageHelper.cameraPreviewBox(controller),
                 CameraButtonWidget(onPressed: takePicture),
-                Container(
-                  padding: EdgeInsets.all(30),
-                  child: widget.photoData != null
-                    ? Image.memory(widget.photoData, height: 300)
-                    : Text("No Photo"),
-                )
+                ImageHelper.capturedImageBox(widget)
               ],
             ),
           ),
