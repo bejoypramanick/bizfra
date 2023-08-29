@@ -11,7 +11,8 @@
 migrate_working_dir/
 
 # IntelliJ related
-*.iml
+# commented by bejoy to pull configs in newly cloned project
+#*.iml
 *.ipr
 *.iws
 .idea/
@@ -24,7 +25,8 @@ migrate_working_dir/
 # Flutter/Dart/Pub related
 **/doc/api/
 **/ios/Flutter/.last_build_id
-.dart_tool/
+# commented by bejoy to pull configs in newly cloned project
+#.dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
 .packages
