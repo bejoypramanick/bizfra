@@ -43,7 +43,7 @@ class _DocumentUploadScreenWidgetState
     final registrationBloc = BlocProvider.of<RegistrationBloc>(context);
     return BlocBuilder<RegistrationBloc, RegistrationState>(
         builder: (context, state) {
-      if (state is SummaryState) {
+      if (state is BusinessRegistrationState) {
         _setDefaultValues(state);
       }
       return Scaffold(
@@ -140,15 +140,15 @@ class _DocumentUploadScreenWidgetState
     widget.gstFileName = fileName;
   }
 
-  void _setDefaultValues(SummaryState state) {
-    widget.aadharNumber = state.documents.aadharNumber;
-    widget.panNumber = state.documents.panNumber;
-    widget.gstNumber = state.documents.gstNumber;
-    widget.aadharData = state.documents.aadharData;
-    widget.panData = state.documents.panData;
-    widget.gstData = state.documents.gstData;
-    widget.aadharFileType = state.documents.aadharFileType;
-    widget.panFileType = state.documents.panFileType;
-    widget.gstFileType = state.documents.gstFileType;
+  void _setDefaultValues(BusinessRegistrationState state) {
+    widget.aadharNumber = state.documents!.aadharNumber;
+    widget.panNumber = state.documents!.panNumber;
+    widget.gstNumber = state.documents!.gstNumber;
+    widget.aadharData = state.documents!.aadharData;
+    widget.panData = state.documents!.panData;
+    widget.gstData = state.documents!.gstData;
+    widget.aadharFileType = state.documents!.aadharFileType;
+    widget.panFileType = state.documents!.panFileType;
+    widget.gstFileType = state.documents!.gstFileType;
   }
 }

@@ -79,7 +79,7 @@ class _CameraWidgetState extends State<CameraWidget> {
 
     return BlocBuilder<RegistrationBloc, RegistrationState>(
         builder: (context, state) {
-      if (state is SummaryState) {
+      if (state is BusinessRegistrationState) {
         _setDefaultValues(state);
       }
       return Scaffold(
@@ -135,7 +135,7 @@ class _CameraWidgetState extends State<CameraWidget> {
     });
   }
 
-  void _setDefaultValues(SummaryState state) {
-    widget.photoData = state.photoModel.photoData;
+  void _setDefaultValues(BusinessRegistrationState state) {
+    widget.photoData = state.photoModel!.photoData;
   }
 }

@@ -40,7 +40,7 @@ class _BusinessDetailsScreenWidgetState
 
     return BlocBuilder<RegistrationBloc, RegistrationState>(
         builder: (context, state) {
-      if (state is SummaryState) {
+      if (state is BusinessRegistrationState) {
         _setDefaultValues(state);
       }
 
@@ -115,7 +115,6 @@ class _BusinessDetailsScreenWidgetState
                       branches: widget.noOfbranches,
                       website: widget.website);
                   registrationBloc.add(BusinessSubmittedEvent(businessModel));
-                  registrationBloc.add(SummaryDetailsUpdatedEvent());
                   Navigator.pushNamed(context, '/documentsUpload');
                 })
               ],
@@ -148,12 +147,12 @@ class _BusinessDetailsScreenWidgetState
     widget.website = newValue;
   }
 
-  void _setDefaultValues(SummaryState state) {
-    widget.orgName = state.business.orgName;
-    widget.orgType = state.business.orgType;
-    widget.expertise = state.business.expertise;
-    widget.address = state.business.address;
-    widget.noOfbranches = state.business.branches;
-    widget.website = state.business.website;
+  void _setDefaultValues(BusinessRegistrationState state) {
+    widget.orgName = state.business!.orgName;
+    widget.orgType = state.business!.orgType;
+    widget.expertise = state.business!.expertise;
+    widget.address = state.business!.address;
+    widget.noOfbranches = state.business!.branches;
+    widget.website = state.business!.website;
   }
 }

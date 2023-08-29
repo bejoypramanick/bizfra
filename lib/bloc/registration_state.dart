@@ -7,47 +7,29 @@ import '../models/user_model.dart';
 
 abstract class RegistrationState {}
 
-class RegistrationInitialState extends RegistrationState {}
-
-class UserDetailsState extends RegistrationState {
-  final UserModel user;
-
-  UserDetailsState(this.user);
+class RegistrationInitialState extends RegistrationState {
 }
 
-class BusinessDetailsState extends RegistrationState {
-  final BusinessModel business;
+class BusinessRegistrationState extends RegistrationState {
+  final UserModel? user;
+  final BusinessModel? business;
+  final DocumentsModel? documents;
+  final PhotoModel? photoModel;
 
-  BusinessDetailsState(this.business);
-}
-
-class DocumentUploadState extends RegistrationState {
-  final DocumentsModel documents;
-
-  DocumentUploadState({required this.documents});
-}
-
-class PhotoUploadState extends RegistrationState {
-  final PhotoModel photoModel;
-
-  PhotoUploadState(this.photoModel);
-}
-
-class SummaryState extends RegistrationState {
-  final UserModel user;
-  final BusinessModel business;
-  final DocumentsModel documents;
-
-  final PhotoModel photoModel;
-
-  SummaryState({
+  BusinessRegistrationState({
     required this.user,
     required this.business,
     required this.documents,
     required this.photoModel,
   });
 
-
+  BusinessRegistrationState copyWith(
+      {UserModel? user, BusinessModel? business, DocumentsModel? documents, PhotoModel? photoModel }) {
+    return BusinessRegistrationState(
+        user: user ?? this.user,
+        business: business ?? this.business,
+        documents: documents ?? this.documents,
+        photoModel: photoModel ?? this.photoModel
+    );
+  }
 }
-
-

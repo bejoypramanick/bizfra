@@ -22,7 +22,7 @@ class SummaryDetailsScreenWidget extends StatelessWidget {
 
       body: BlocBuilder<RegistrationBloc, RegistrationState>(
           builder: (context, state) {
-        if (state is SummaryState) {
+        if (state is BusinessRegistrationState) {
           body:
           return SingleChildScrollView( child: Center(
               child: Column(
@@ -32,7 +32,7 @@ class SummaryDetailsScreenWidget extends StatelessWidget {
                 SizedBox(
                     width: 100,
                     height: 100,
-                    child: Image.memory(state!.photoModel.photoData,
+                    child: Image.memory(state!.photoModel!.photoData,
                         fit: BoxFit.fill)),
 
                     DataTable(
@@ -49,69 +49,69 @@ class SummaryDetailsScreenWidget extends StatelessWidget {
                   rows: [
                     DataRow(cells: [
                       const DataCell(Text('First Name')),
-                      DataCell(Text(state!.user.firstName)),
+                      DataCell(Text(state!.user!.firstName)),
                     ]),
                     DataRow(cells: [
                       const DataCell(Text('Last Name')),
-                      DataCell(Text(state!.user.lastName)),
+                      DataCell(Text(state!.user!.lastName)),
                     ]),
                     DataRow(cells: [
                       const DataCell(Text('Date of Birth')),
-                      DataCell(Text(state!.user.dob)),
+                      DataCell(Text(state!.user!.dob)),
                     ]),
                     DataRow(cells: [
                       const DataCell(Text('Email')),
-                      DataCell(Text(state!.user.email)),
+                      DataCell(Text(state!.user!.email)),
                     ]),
                     DataRow(cells: [
                       const DataCell(Text('Mobile')),
-                      DataCell(Text(state!.user.mobile)),
+                      DataCell(Text(state!.user!.mobile)),
                     ]),
                     DataRow(cells: [
                       const DataCell(Text('Organization Name')),
-                      DataCell(Text(state!.business.orgName)),
+                      DataCell(Text(state!.business!.orgName)),
                     ]),
                     DataRow(cells: [
                       const DataCell(Text('Organization Type')),
-                      DataCell(Text(state!.business.orgType)),
+                      DataCell(Text(state!.business!.orgType)),
                     ]),
                     DataRow(cells: [
                       const DataCell(Text('Business Expertise')),
-                      DataCell(Text(state!.business.expertise)),
+                      DataCell(Text(state!.business!.expertise)),
                     ]),
                     DataRow(cells: [
                       const DataCell(Text('Registered Address')),
-                      DataCell(Text(state!.business.address)),
+                      DataCell(Text(state!.business!.address)),
                     ]),
                     DataRow(cells: [
                       const DataCell(Text('Website')),
-                      DataCell(Text(state!.business.website)),
+                      DataCell(Text(state!.business!.website)),
                     ]),
                     DataRow(cells: [
                       const DataCell(Text('Number of Branches')),
-                      DataCell(Text(state!.business.branches)),
+                      DataCell(Text(state!.business!.branches)),
                     ]),
                     DataRow(cells: [
                       const DataCell(Text('Aadhar Number')),
-                      DataCell(Text(state!.documents.aadharNumber)),
+                      DataCell(Text(state!.documents!.aadharNumber)),
                     ]),
                     DataRow(cells: [
                       const DataCell(Text('Pan Number')),
-                      DataCell(Text(state!.documents.panNumber)),
+                      DataCell(Text(state!.documents!.panNumber)),
                     ]),
                     DataRow(cells: [
                       const DataCell(Text('GST Number')),
-                      DataCell(Text(state!.documents.gstNumber)),
+                      DataCell(Text(state!.documents!.gstNumber)),
                     ]),
                     DataRow(cells: [
                       const DataCell(Text('Aadhar Image')),
                       DataCell(Container(
                           constraints: const BoxConstraints(
                               maxWidth: 200, maxHeight: 200),
-                          child: state!.documents.aadharFileType ==
+                          child: state!.documents!.aadharFileType ==
                                   FileType.custom
-                              ? PDFView(pdfData: state!.documents.aadharData)
-                              : Image.memory(state!.documents.aadharData,
+                              ? PDFView(pdfData: state!.documents!.aadharData)
+                              : Image.memory(state!.documents!.aadharData,
                                   fit: BoxFit.fill))),
                     ]),
                     DataRow(cells: [
@@ -119,9 +119,9 @@ class SummaryDetailsScreenWidget extends StatelessWidget {
                       DataCell(Container(
                           constraints: const BoxConstraints(
                               maxWidth: 200, maxHeight: 200),
-                          child: state!.documents.panFileType == FileType.custom
-                              ? PDFView(pdfData: state!.documents.panData)
-                              : Image.memory(state!.documents.panData,
+                          child: state!.documents!.panFileType == FileType.custom
+                              ? PDFView(pdfData: state!.documents!.panData)
+                              : Image.memory(state!.documents!.panData,
                                   fit: BoxFit.fill))),
                     ]),
                     DataRow(cells: [
@@ -129,9 +129,9 @@ class SummaryDetailsScreenWidget extends StatelessWidget {
                       DataCell(Container(
                           constraints: const BoxConstraints(
                               maxWidth: 200, maxHeight: 200),
-                          child: state!.documents.gstFileType == FileType.custom
-                              ? PDFView(pdfData: state!.documents.gstData)
-                              : Image.memory(state!.documents.gstData,
+                          child: state!.documents!.gstFileType == FileType.custom
+                              ? PDFView(pdfData: state!.documents!.gstData)
+                              : Image.memory(state!.documents!.gstData,
                                   fit: BoxFit.fill))),
                     ]),
                   ],

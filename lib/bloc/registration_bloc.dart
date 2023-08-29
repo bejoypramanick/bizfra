@@ -10,44 +10,34 @@ import '../models/photo_model.dart';
 import '../models/user_model.dart';
 
 class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
-  late UserModel _userModel;
-  late BusinessModel _businessModel;
-  late DocumentsModel _documentsModel;
-  late PhotoModel _photoModel;
-  late String text;
 
+  BusinessRegistrationState bizRegState =  BusinessRegistrationState(user: null, business: null, documents: null, photoModel: null);
   RegistrationBloc() : super(RegistrationInitialState()) {
     on<UserSubmittedEvent>((event, emit) {
       // Handle user submission and emit state
-      _userModel = event.user;
-      emit(UserDetailsState(event.user)); // Emit the corresponding state
+      bizRegState.copyWith(user: event.user);
+      emit(bizRegState); // Emit the corresponding state
     });
 
     on<BusinessSubmittedEvent>((event, emit) {
       // Handle business submission and emit state
-      _businessModel = event.business;
-      emit(
-          BusinessDetailsState(event.business)); // Emit the corresponding state
+      bizRegState.copyWith(business: event.business);
+      emit(bizRegState); // Emit the corresponding corresponding state
     });
 
     on<DocumentSubmittedEvent>((event, emit) {
       // Handle document submission and emit state
-      _documentsModel = event.documents;
-      emit(DocumentUploadState(
-          documents: event.documents)); // Emit the corresponding state
+      bizRegState.copyWith(documents: event.documents);
+      emit(bizRegState); // Emit the corresponding state
     });
     on<PhotoTakenEvent>((event, emit) {
       // Handle document submission and emit state
-      _photoModel = event.photo;
-      emit(PhotoUploadState(event.photo)); // Emit the corresponding state
+      bizRegState.copyWith(photoModel: event.photo);
+      emit(bizRegState); // Emit the corresponding state
     });
     on<SummaryDetailsUpdatedEvent>((event, emit) {
       // Handle document submission and emit state
-      emit(SummaryState(
-          user: _userModel,
-          business: _businessModel,
-          documents: _documentsModel,
-          photoModel: _photoModel)); // Emit the corresponding state
+      emit(bizRegState);
     });
 
   }

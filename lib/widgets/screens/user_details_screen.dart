@@ -32,7 +32,7 @@ class _UserDetailsScreenWidgetState extends State<UserDetailsScreenWidget> {
     final registrationBloc = BlocProvider.of<RegistrationBloc>(context);
     return BlocBuilder<RegistrationBloc, RegistrationState>(
         builder: (context, state) {
-      if (state is UserDetailsState) {
+      if (state is BusinessRegistrationState) {
         _setDefaultValues(state);
       }
       return Scaffold(
@@ -95,7 +95,6 @@ class _UserDetailsScreenWidgetState extends State<UserDetailsScreenWidget> {
                       email: widget.email,
                       mobile: widget.mobile);
                   registrationBloc.add(UserSubmittedEvent(userModel));
-                  registrationBloc.add(SummaryDetailsUpdatedEvent());
                   Navigator.pushNamed(context, '/businessDetails');
                 })
               ],
@@ -124,11 +123,11 @@ class _UserDetailsScreenWidgetState extends State<UserDetailsScreenWidget> {
     widget.mobile = newValue;
   }
 
-  void _setDefaultValues(UserDetailsState state) {
-    widget.firstName = state.user.firstName;
-    widget.lastName = state.user.lastName;
-    widget.dob = state.user.dob;
-    widget.email = state.user.email;
-    widget.mobile = state.user.mobile;
+  void _setDefaultValues(BusinessRegistrationState state) {
+    widget.firstName = state.user!.firstName;
+    widget.lastName = state.user!.lastName;
+    widget.dob = state.user!.dob;
+    widget.email = state.user!.email;
+    widget.mobile = state.user!.mobile;
   }
 }
