@@ -16,7 +16,7 @@ class CameraWidget extends StatefulWidget {
   CameraWidget(RegistrationBloc registrationBloc, {super.key});
 
   Uint8List photoData = Uint8List(0);
-
+  bool isPhotoClicked = false;
   @override
   _CameraWidgetState createState() => _CameraWidgetState();
 }
@@ -63,6 +63,7 @@ class _CameraWidgetState extends State<CameraWidget> {
         print(
             "Picture captured: ${picture.path}"); // Debugging: Check the picture path
         widget.photoData = pictureBytes;
+        widget.isPhotoClicked = true;
         setState(() {
 
         });
@@ -78,10 +79,10 @@ class _CameraWidgetState extends State<CameraWidget> {
 
     return BlocBuilder<RegistrationBloc, RegistrationState>(
         builder: (context, state) {
-      if (state is BusinessRegistrationState) {
-        if(state.photoModel?.photoData != null && state.photoModel!= null ) {
-          _setDefaultValues(state);
-        }
+      if (state is BusinessRegistrationState && widget.isPhotoClicked == false ) {
+
+          widget.photoData = state.photoModel?.photoData ??  Uint8List(0);
+
       }
       return Scaffold(
         appBar: AppBar(
@@ -109,9 +110,8 @@ class _CameraWidgetState extends State<CameraWidget> {
                 Container(
                   padding: EdgeInsets.all(30),
                   child: widget.photoData != null
-
-                      ? Image.memory(widget.photoData, height: 300)
-                      : Text("No Photo"),
+                    ? Image.memory(widget.photoData, height: 300)
+                    : Text("No Photo"),
                 )
               ],
             ),
@@ -122,11 +122,12 @@ class _CameraWidgetState extends State<CameraWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               BackButtonWidget(onPressed: () {
-                Navigator.of(context).pop();
+                //Navigator.of(context).pop();
+                Navigator.pushNamed(context, '/documentsUpload');
               }),
               NextButtonWidget(onPressed: () {
                 final photoModel =
-                    PhotoModel(photoData: widget?.photoData ?? Uint8List(0));
+                PhotoModel(photoData: widget?.photoData ?? Uint8List(0) );
                 registrationBloc.add(PhotoTakenEvent(photoModel));
                 Navigator.pushNamed(context, '/summaryDetails');
               })
@@ -137,7 +138,5 @@ class _CameraWidgetState extends State<CameraWidget> {
     });
   }
 
-  void _setDefaultValues(BusinessRegistrationState state) {
-    widget.photoData = state.photoModel?.photoData ?? Uint8List(0);
-  }
+
 }
