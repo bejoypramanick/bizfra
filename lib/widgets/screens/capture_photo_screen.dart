@@ -24,7 +24,6 @@ class CameraWidget extends StatefulWidget {
 class _CameraWidgetState extends State<CameraWidget> {
   List<CameraDescription>? cameras; //list out the camera available
   CameraController? controller; //controller for camera
-  XFile? image; //for captured image
 
   @override
   void initState() {
@@ -63,9 +62,9 @@ class _CameraWidgetState extends State<CameraWidget> {
         final Uint8List pictureBytes = await picture.readAsBytes();
         print(
             "Picture captured: ${picture.path}"); // Debugging: Check the picture path
+        widget.photoData = pictureBytes;
         setState(() {
-          image = picture;
-          widget.photoData = pictureBytes;
+
         });
       }
     } catch (e) {
@@ -80,7 +79,9 @@ class _CameraWidgetState extends State<CameraWidget> {
     return BlocBuilder<RegistrationBloc, RegistrationState>(
         builder: (context, state) {
       if (state is BusinessRegistrationState) {
-        _setDefaultValues(state);
+        if(state.photoModel?.photoData != null && state.photoModel!= null ) {
+          _setDefaultValues(state);
+        }
       }
       return Scaffold(
         appBar: AppBar(
@@ -108,8 +109,9 @@ class _CameraWidgetState extends State<CameraWidget> {
                 Container(
                   padding: EdgeInsets.all(30),
                   child: widget.photoData != null
+
                       ? Image.memory(widget.photoData, height: 300)
-                      : Text("No image captured"),
+                      : Text("No Photo"),
                 )
               ],
             ),
@@ -123,9 +125,9 @@ class _CameraWidgetState extends State<CameraWidget> {
                 Navigator.of(context).pop();
               }),
               NextButtonWidget(onPressed: () {
-                final photoModel = PhotoModel(photoData: widget.photoData);
+                final photoModel =
+                    PhotoModel(photoData: widget?.photoData ?? Uint8List(0));
                 registrationBloc.add(PhotoTakenEvent(photoModel));
-                registrationBloc.add(SummaryDetailsUpdatedEvent());
                 Navigator.pushNamed(context, '/summaryDetails');
               })
             ],
@@ -136,6 +138,6 @@ class _CameraWidgetState extends State<CameraWidget> {
   }
 
   void _setDefaultValues(BusinessRegistrationState state) {
-    widget.photoData = state.photoModel!.photoData;
+    widget.photoData = state.photoModel?.photoData ?? Uint8List(0);
   }
 }

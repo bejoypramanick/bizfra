@@ -124,10 +124,10 @@ class _UserDetailsScreenWidgetState extends State<UserDetailsScreenWidget> {
   }
 
   void _setDefaultValues(BusinessRegistrationState state) {
-    widget.firstName = state.user!.firstName;
-    widget.lastName = state.user!.lastName;
-    widget.dob = state.user!.dob;
-    widget.email = state.user!.email;
-    widget.mobile = state.user!.mobile;
+    widget.firstName = state.user?.firstName ?? "";
+    widget.lastName = state.user?.lastName ?? "";
+    widget.dob = state.user?.dob ?? "";
+    widget.email = state.user?.email ?? "";
+    widget.mobile = state.user?.mobile ?? "";
   }
 }

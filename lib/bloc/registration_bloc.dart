@@ -15,24 +15,24 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
   RegistrationBloc() : super(RegistrationInitialState()) {
     on<UserSubmittedEvent>((event, emit) {
       // Handle user submission and emit state
-      bizRegState.copyWith(user: event.user);
+      bizRegState = bizRegState.copyWith(user: event.user);
       emit(bizRegState); // Emit the corresponding state
     });
 
     on<BusinessSubmittedEvent>((event, emit) {
       // Handle business submission and emit state
-      bizRegState.copyWith(business: event.business);
+      bizRegState = bizRegState.copyWith(business: event.business);
       emit(bizRegState); // Emit the corresponding corresponding state
     });
 
     on<DocumentSubmittedEvent>((event, emit) {
       // Handle document submission and emit state
-      bizRegState.copyWith(documents: event.documents);
+      bizRegState = bizRegState.copyWith(documents: event.documents);
       emit(bizRegState); // Emit the corresponding state
     });
     on<PhotoTakenEvent>((event, emit) {
       // Handle document submission and emit state
-      bizRegState.copyWith(photoModel: event.photo);
+      bizRegState = bizRegState.copyWith(photoModel: event.photo);
       emit(bizRegState); // Emit the corresponding state
     });
     on<SummaryDetailsUpdatedEvent>((event, emit) {

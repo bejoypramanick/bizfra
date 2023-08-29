@@ -21,15 +21,9 @@ class DocumentUploadScreenWidget extends StatefulWidget {
   String aadharNumber = '';
   String panNumber = '';
   String gstNumber = '';
-  Uint8List aadharData = Uint8List(0);
-  Uint8List panData = Uint8List(0);
-  Uint8List gstData = Uint8List(0);
-  String aadharFileName ="";
-  String panFileName ="";
-  String  gstFileName = "";
-  FileType aadharFileType = FileType.any;
-  FileType panFileType = FileType.any;
-  FileType gstFileType = FileType.any;
+  PlatformFile? aadharFile;
+  PlatformFile? panFile;
+  PlatformFile? gstFile;
 
   @override
   _DocumentUploadScreenWidgetState createState() =>
@@ -59,7 +53,7 @@ class _DocumentUploadScreenWidgetState
                     onChange: _updateAadharNumber,
                     onValidate: FieldValidator.validateAadharNumber,
                     savedText: widget.aadharNumber)),
-            FileUploadWidget(onUploadSuccess: _updateAadharByteArray, selectedFile: widget.aadharData!=null ? PlatformFile(bytes: widget.aadharData, name: widget.aadharFileName, size: widget.aadharData.elementSizeInBytes) : null),
+            FileUploadWidget(onUploadSuccess: _updateAadharFile, selectedFile: widget.aadharFile),
             ContainerWidget(
                 widget: TextFieldWidget(
                     hintText: "Business PAN Number",
@@ -67,7 +61,7 @@ class _DocumentUploadScreenWidgetState
                     isMandatory: true,
                     onChange: _updatePAN,
                     onValidate: FieldValidator.validatePanNumber, savedText: widget.panNumber)),
-            FileUploadWidget(onUploadSuccess: _updatePANByteArray, selectedFile: widget.panData !=null ? PlatformFile(bytes: widget.panData, name: widget.panFileName, size: widget.panData.elementSizeInBytes) : null),
+            FileUploadWidget(onUploadSuccess: _updatePANFile, selectedFile: widget.panFile),
             ContainerWidget(
                 widget: TextFieldWidget(
                     hintText: "GST Registration Number",
@@ -75,7 +69,7 @@ class _DocumentUploadScreenWidgetState
                     isMandatory: false,
                     onChange: _updateGST,
                     onValidate: FieldValidator.validateGstNumber,  savedText: widget.gstNumber)),
-            FileUploadWidget(onUploadSuccess: _updateGSTByteArray, selectedFile: widget.gstData!=null? PlatformFile(bytes: widget.gstData, name: widget.gstFileName, size: widget.gstData.elementSizeInBytes) : null),
+            FileUploadWidget(onUploadSuccess: _updateGSTFile, selectedFile: widget.gstFile),
           ]))),
           bottomNavigationBar: BottomAppBar(
             child: Row(
@@ -84,24 +78,12 @@ class _DocumentUploadScreenWidgetState
                 // BackButtonWidget(onPressed: navigateBack),
 
                 BackButtonWidget(onPressed: () {
-                  Navigator.of(context).pop();
+                 // Navigator.of(context).pop();
+                  Navigator.pushNamed(context, '/businessDetails');
                 }),
                 NextButtonWidget(onPressed: () {
-                  DocumentsModel documentModel = DocumentsModel(
-                      aadharNumber: widget.aadharNumber,
-                      panNumber: widget.panNumber,
-                      gstNumber: widget.gstNumber,
-                      aadharData: widget.aadharData,
-                      panData: widget.panData,
-                      gstData: widget.gstData,
-                      aadharFileType: widget.aadharFileType,
-                      panFileType: widget.panFileType,
-                      gstFileType: widget.gstFileType,
-                      aadharFileName: widget.aadharFileName,
-                      panFileName: widget.panFileName,
-                      gstFileName: widget.gstFileName);
+                  DocumentsModel documentModel = DocumentsModel(aadharNumber: widget.aadharNumber, panNumber: widget.panNumber, gstNumber: widget.gstNumber, aadharFile: widget.aadharFile, panFile: widget.panFile, gstFile: widget.gstFile);
                   registrationBloc.add(DocumentSubmittedEvent(documentModel));
-                  registrationBloc.add(SummaryDetailsUpdatedEvent());
                   Navigator.pushNamed(context, '/photoUpload');
                 })
               ],
@@ -114,41 +96,34 @@ class _DocumentUploadScreenWidgetState
     widget.aadharNumber = newValue;
   }
 
-  void _updateAadharByteArray(Uint8List? data, FileType fileType, String fileName) {
-    widget.aadharData = data!;
-    widget.aadharFileType = fileType;
-    widget.aadharFileName = fileName;
+  void _updateAadharFile(PlatformFile file) {
+    widget.aadharFile = file!;
   }
 
   void _updatePAN(String newValue) {
     widget.panNumber = newValue;
   }
 
-  void _updatePANByteArray(Uint8List? data, FileType fileType,String fileName) {
-    widget.panData = data!;
-    widget.panFileType = fileType;
-    widget.panFileName = fileName;
+  void _updatePANFile(PlatformFile file) {
+    widget.panFile = file!;
   }
 
   void _updateGST(String newValue) {
     widget.gstNumber = newValue;
   }
 
-  void _updateGSTByteArray(Uint8List? data, FileType fileType, String fileName) {
-    widget.gstData = data!;
-    widget.gstFileType = fileType;
-    widget.gstFileName = fileName;
+  void _updateGSTFile(PlatformFile file) {
+    widget.gstFile= file!;
+
   }
 
   void _setDefaultValues(BusinessRegistrationState state) {
-    widget.aadharNumber = state.documents!.aadharNumber;
-    widget.panNumber = state.documents!.panNumber;
-    widget.gstNumber = state.documents!.gstNumber;
-    widget.aadharData = state.documents!.aadharData;
-    widget.panData = state.documents!.panData;
-    widget.gstData = state.documents!.gstData;
-    widget.aadharFileType = state.documents!.aadharFileType;
-    widget.panFileType = state.documents!.panFileType;
-    widget.gstFileType = state.documents!.gstFileType;
+    widget.aadharNumber = state.documents?.aadharNumber ?? "";
+    widget.panNumber = state.documents?.panNumber ?? "";
+    widget.gstNumber = state.documents?.gstNumber ?? "";
+   widget.aadharFile = state.documents?.aadharFile;
+    widget.panFile = state.documents?.panFile;
+    widget.gstFile = state.documents?.gstFile;
+
   }
 }

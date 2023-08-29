@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class FileUploadWidget extends StatefulWidget {
   FileUploadWidget({super.key, required this.onUploadSuccess, this.selectedFile});
 
-  final void Function(Uint8List? data, FileType fileType, String fileName) onUploadSuccess;
+  final void Function(PlatformFile file) onUploadSuccess;
   FileType fileType = FileType.any;
   PlatformFile? selectedFile;
   @override
@@ -26,20 +26,10 @@ class _FileUploadWidgetState extends State<FileUploadWidget> {
 
       if (result != null) {
         widget.selectedFile = result.files.single;
-        widget.fileType = _determineFileType(result.files.single.name);
-        if (widget.selectedFile?.bytes != null) { //chrome web
-          setState(() {
-            widget.onUploadSuccess(widget.selectedFile?.bytes, widget.fileType, widget.selectedFile!.name);
-          });
-        } else {
-          widget.selectedFile = result.files.single;
-          File file =  File(  widget.selectedFile!.path!);
-          List<int> fileBytes = await file.readAsBytes();
-          Uint8List bytes = Uint8List.fromList(fileBytes);
-          setState(()   { //mobile
-            widget.onUploadSuccess(bytes, widget.fileType, widget.selectedFile!.name);
-          });
-        }
+        widget.onUploadSuccess(result.files.single);
+        setState(() {
+
+        });
       }
     } catch (e) {
       print('Error picking files: $e');
@@ -59,7 +49,7 @@ class _FileUploadWidgetState extends State<FileUploadWidget> {
           SizedBox(height: 16),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [ widget.selectedFile  != null  ? Text('File: ${widget.selectedFile?.name}') :const Text('') ]
+            children: [ Text('File: ${widget.selectedFile?.name ?? ''}') ]
           ),
         ],
       ),

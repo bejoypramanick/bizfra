@@ -104,7 +104,8 @@ class _BusinessDetailsScreenWidgetState
               children: [
                 // BackButtonWidget(onPressed: navigateBack),
                 BackButtonWidget(onPressed: () {
-                  Navigator.of(context).pop();
+                  //Navigator.of(context).pop();
+                  Navigator.pushNamed(context, '/userDetails');
                 }),
                 NextButtonWidget(onPressed: () {
                   BusinessModel businessModel = BusinessModel(
@@ -148,11 +149,11 @@ class _BusinessDetailsScreenWidgetState
   }
 
   void _setDefaultValues(BusinessRegistrationState state) {
-    widget.orgName = state.business!.orgName;
-    widget.orgType = state.business!.orgType;
-    widget.expertise = state.business!.expertise;
-    widget.address = state.business!.address;
-    widget.noOfbranches = state.business!.branches;
-    widget.website = state.business!.website;
+    widget.orgName = state.business?.orgName ?? "";
+    widget.orgType = state.business?.orgType ?? "";
+    widget.expertise = state.business?.expertise ?? "";
+    widget.address = state.business?.address ?? "";
+    widget.noOfbranches = state.business?.branches ?? "";
+    widget.website = state.business?.website ?? "";
   }
 }
