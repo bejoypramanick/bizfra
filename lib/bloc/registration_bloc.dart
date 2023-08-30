@@ -4,14 +4,10 @@ import 'package:bizfra/bloc/registration_event.dart';
 import 'package:bizfra/bloc/registration_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../models/business_model.dart';
-import '../models/documents_model.dart';
-import '../models/photo_model.dart';
-import '../models/user_model.dart';
-
 class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
+  BusinessRegistrationState bizRegState = BusinessRegistrationState(
+      user: null, business: null, documents: null, photoModel: null);
 
-  BusinessRegistrationState bizRegState =  BusinessRegistrationState(user: null, business: null, documents: null, photoModel: null);
   RegistrationBloc() : super(RegistrationInitialState()) {
     on<UserSubmittedEvent>((event, emit) {
       // Handle user submission and emit state
@@ -39,6 +35,5 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
       // Handle document submission and emit state
       emit(bizRegState);
     });
-
   }
 }

@@ -6,10 +6,11 @@ import 'button_sized_box_widget.dart';
 class SubmitButtonWidget extends NextButtonWidget {
   final VoidCallback? onButtonClicked;
 
-  const SubmitButtonWidget({super.key,  this.onButtonClicked});
+  const SubmitButtonWidget({super.key, this.onButtonClicked});
 
   @override
   Widget build(BuildContext context) {
-    return ButtonSizedBoxWidget(onButtonPressed: onButtonClicked, buttonTxt: 'SUBMIT');
+    return ButtonSizedBoxWidget(
+        onButtonPressed: onButtonClicked, buttonTxt: 'SUBMIT');
   }
 }

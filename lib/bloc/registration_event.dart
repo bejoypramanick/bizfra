@@ -33,7 +33,4 @@ class PhotoTakenEvent extends RegistrationEvent {
 
 class SummaryDetailsUpdatedEvent extends RegistrationEvent {
   SummaryDetailsUpdatedEvent();
-  
 }
-
-

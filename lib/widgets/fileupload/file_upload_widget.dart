@@ -1,22 +1,19 @@
-import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class FileUploadWidget extends StatefulWidget {
-  FileUploadWidget({super.key, required this.onUploadSuccess, this.selectedFile});
+  FileUploadWidget(
+      {super.key, required this.onUploadSuccess, this.selectedFile});
 
   final void Function(PlatformFile file) onUploadSuccess;
   FileType fileType = FileType.any;
   PlatformFile? selectedFile;
+
   @override
   _FileUploadWidgetState createState() => _FileUploadWidgetState();
 }
 
 class _FileUploadWidgetState extends State<FileUploadWidget> {
-
-
   Future<void> pickFiles() async {
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -27,9 +24,7 @@ class _FileUploadWidgetState extends State<FileUploadWidget> {
       if (result != null) {
         widget.selectedFile = result.files.single;
         widget.onUploadSuccess(result.files.single);
-        setState(() {
-
-        });
+        setState(() {});
       }
     } catch (e) {
       print('Error picking files: $e');
@@ -48,9 +43,8 @@ class _FileUploadWidgetState extends State<FileUploadWidget> {
           ),
           SizedBox(height: 16),
           Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [ Text('File: ${widget.selectedFile?.name ?? ''}') ]
-          ),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [Text('File: ${widget.selectedFile?.name ?? ''}')]),
         ],
       ),
     );

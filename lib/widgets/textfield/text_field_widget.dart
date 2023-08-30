@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class TextFieldWidget extends StatefulWidget {
   TextFieldWidget(
@@ -8,7 +7,8 @@ class TextFieldWidget extends StatefulWidget {
       required this.iconData,
       required this.isMandatory,
       required this.onChange,
-      required this.onValidate, this.savedText});
+      required this.onValidate,
+      this.savedText});
 
   final String hintText;
   final IconData iconData;

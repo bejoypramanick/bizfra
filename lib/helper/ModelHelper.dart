@@ -5,15 +5,11 @@ import 'package:bizfra/models/business_model.dart';
 import 'package:bizfra/models/documents_model.dart';
 import 'package:bizfra/widgets/screens/capture_photo_screen.dart';
 import 'package:bizfra/widgets/screens/documents_upload_screen.dart';
-import 'package:flutter/cupertino.dart';
 
 import '../models/photo_model.dart';
 import '../models/user_model.dart';
 import '../widgets/screens/business_details_screen.dart';
 import '../widgets/screens/user_details_screen.dart';
-
-
-
 
 class ModelHelper {
   static UserModel populateUserModelFromWidget(UserDetailsScreenWidget widget) {
@@ -61,7 +57,7 @@ class ModelHelper {
   DocumentsModel? documentsModel;
   PhotoModel? photoModel;
 
-   void populateUserModelFromState(BusinessRegistrationState state){
+  void populateUserModelFromState(BusinessRegistrationState state) {
     userModel = state.user;
     businessModel = state.business;
     documentsModel = state.documents;

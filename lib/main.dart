@@ -1,5 +1,5 @@
-import 'package:bizfra/widgets/screens/capture_photo_screen.dart';
 import 'package:bizfra/widgets/screens/business_details_screen.dart';
+import 'package:bizfra/widgets/screens/capture_photo_screen.dart';
 import 'package:bizfra/widgets/screens/documents_upload_screen.dart';
 import 'package:bizfra/widgets/screens/summary_screen.dart';
 import 'package:bizfra/widgets/screens/user_details_screen.dart';

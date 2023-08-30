@@ -7,8 +7,7 @@ import '../models/user_model.dart';
 
 abstract class RegistrationState {}
 
-class RegistrationInitialState extends RegistrationState {
-}
+class RegistrationInitialState extends RegistrationState {}
 
 class BusinessRegistrationState extends RegistrationState {
   final UserModel? user;
@@ -24,12 +23,14 @@ class BusinessRegistrationState extends RegistrationState {
   });
 
   BusinessRegistrationState copyWith(
-      {UserModel? user, BusinessModel? business, DocumentsModel? documents, PhotoModel? photoModel }) {
+      {UserModel? user,
+      BusinessModel? business,
+      DocumentsModel? documents,
+      PhotoModel? photoModel}) {
     return BusinessRegistrationState(
         user: user ?? this.user,
         business: business ?? this.business,
         documents: documents ?? this.documents,
-        photoModel: photoModel ?? this.photoModel
-    );
+        photoModel: photoModel ?? this.photoModel);
   }
 }

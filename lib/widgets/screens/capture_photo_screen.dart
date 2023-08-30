@@ -1,9 +1,6 @@
-import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:bizfra/bloc/registration_event.dart';
 import 'package:bizfra/helper/ImageHelper.dart';
-import 'package:bizfra/models/photo_model.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,6 +11,7 @@ import '../../helper/EventHelper.dart';
 import '../buttons/back_button_widget.dart';
 import '../buttons/camera_button_widget.dart';
 import '../buttons/next_button_widget.dart';
+import '../header/header_widget.dart';
 import '../navigation/nav_bar_widget.dart';
 
 class CameraWidget extends StatefulWidget {
@@ -21,6 +19,7 @@ class CameraWidget extends StatefulWidget {
 
   Uint8List photoData = Uint8List(0);
   bool isPhotoClicked = false;
+
   @override
   _CameraWidgetState createState() => _CameraWidgetState();
 }
@@ -68,9 +67,7 @@ class _CameraWidgetState extends State<CameraWidget> {
             "Picture captured: ${picture.path}"); // Debugging: Check the picture path
         widget.photoData = pictureBytes;
         widget.isPhotoClicked = true;
-        setState(() {
-
-        });
+        setState(() {});
       }
     } catch (e) {
       print("Error taking picture: $e");
@@ -83,30 +80,26 @@ class _CameraWidgetState extends State<CameraWidget> {
 
     return BlocBuilder<RegistrationBloc, RegistrationState>(
         builder: (context, state) {
-      if (state is BusinessRegistrationState && widget.isPhotoClicked == false ) {
-
-          widget.photoData = state.photoModel?.photoData ??  Uint8List(0);
-
+      if (state is BusinessRegistrationState &&
+          widget.isPhotoClicked == false) {
+        widget.photoData = state.photoModel?.photoData ?? Uint8List(0);
       }
       return Scaffold(
-        appBar: AppBar(
-          title: Text('Take Picture'),
-        ),
-        body: Container(
-          alignment: Alignment.center,
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                ImageHelper.cameraPreviewBox(controller),
-                CameraButtonWidget(onPressed: takePicture),
-                ImageHelper.capturedImageBox(widget)
-              ],
+          appBar: const HeaderWidget(),
+          body: Container(
+            alignment: Alignment.center,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  ImageHelper.cameraPreviewBox(controller),
+                  CameraButtonWidget(onPressed: takePicture),
+                  ImageHelper.capturedImageBox(widget)
+                ],
+              ),
             ),
           ),
-        ),
-
           bottomNavigationBar:
-          BottomNavBarWidget(backButtonWidget: BackButtonWidget(
+              BottomNavBarWidget(backButtonWidget: BackButtonWidget(
             onButtonClicked: () {
               EventHelper.photoScreenBackButtonClicked(context);
             },
@@ -114,9 +107,6 @@ class _CameraWidgetState extends State<CameraWidget> {
             EventHelper.photoScreenNextButtonClicked(
                 registrationBloc, context, widget);
           })));
-
     });
   }
-
-
 }

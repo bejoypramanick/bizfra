@@ -1,4 +1,3 @@
-import 'package:bizfra/widgets/buttons/button_sized_box_widget.dart';
 import 'package:flutter/material.dart';
 
 class CameraButtonWidget extends StatelessWidget {
@@ -8,7 +7,7 @@ class CameraButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  ElevatedButton.icon(
+    return ElevatedButton.icon(
       onPressed: onPressed,
       icon: const Icon(Icons.camera),
       label: const Text("Take Photo"),

@@ -6,7 +6,7 @@ class ButtonSizedBoxWidget extends StatelessWidget {
   String buttonTxt;
 
   ButtonSizedBoxWidget(
-      {super.key,  this.onButtonPressed, required this.buttonTxt});
+      {super.key, this.onButtonPressed, required this.buttonTxt});
 
   @override
   Widget build(BuildContext context) {

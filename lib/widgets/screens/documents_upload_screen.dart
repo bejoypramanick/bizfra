@@ -1,20 +1,19 @@
-import 'dart:typed_data';
 import 'package:bizfra/bloc/registration_state.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:bizfra/models/documents_model.dart';
 import 'package:bizfra/validation/FieldValidator.dart';
 import 'package:bizfra/widgets/fileupload/file_upload_widget.dart';
 import 'package:bizfra/widgets/textfield/text_field_widget.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/registration_bloc.dart';
-import '../../bloc/registration_event.dart';
 import '../../helper/EventHelper.dart';
 import '../buttons/back_button_widget.dart';
 import '../buttons/next_button_widget.dart';
 import '../container/container_widget.dart';
+import '../container/text_field_container_widget.dart';
 import '../header/header_title_padding_widget.dart';
+import '../header/header_widget.dart';
 import '../navigation/nav_bar_widget.dart';
 
 class DocumentUploadScreenWidget extends StatefulWidget {
@@ -43,39 +42,37 @@ class _DocumentUploadScreenWidgetState
         _setDefaultValues(state);
       }
       return Scaffold(
+          appBar: const HeaderWidget(),
           body: Center(
               child: SingleChildScrollView(
                   child: Column(children: [
             const HeaderTitlePaddingWidget(headerTitle: 'Document Upload'),
-            ContainerWidget(
-                widget: TextFieldWidget(
-                    hintText: "Aadhar Number",
-                    iconData: Icons.numbers_sharp,
-                    isMandatory: true,
-                    onChange: _updateAadharNumber,
-                    onValidate: FieldValidator.validateAadharNumber,
-                    savedText: widget.aadharNumber)),
+            TextFieldContainerWidget(
+                hintText: "Aadhar Number",
+                iconData: Icons.numbers_sharp,
+                isMandatory: true,
+                onChange: _updateAadharNumber,
+                onValidate: FieldValidator.validateAadharNumber,
+                savedText: widget.aadharNumber),
             FileUploadWidget(
                 onUploadSuccess: _updateAadharFile,
                 selectedFile: widget.aadharFile),
-            ContainerWidget(
-                widget: TextFieldWidget(
-                    hintText: "Business PAN Number",
-                    iconData: Icons.numbers_sharp,
-                    isMandatory: true,
-                    onChange: _updatePAN,
-                    onValidate: FieldValidator.validatePanNumber,
-                    savedText: widget.panNumber)),
+            TextFieldContainerWidget(
+                hintText: "Business PAN Number",
+                iconData: Icons.numbers_sharp,
+                isMandatory: true,
+                onChange: _updatePAN,
+                onValidate: FieldValidator.validatePanNumber,
+                savedText: widget.panNumber),
             FileUploadWidget(
                 onUploadSuccess: _updatePANFile, selectedFile: widget.panFile),
-            ContainerWidget(
-                widget: TextFieldWidget(
-                    hintText: "GST Registration Number",
-                    iconData: Icons.numbers_sharp,
-                    isMandatory: false,
-                    onChange: _updateGST,
-                    onValidate: FieldValidator.validateGstNumber,
-                    savedText: widget.gstNumber)),
+            TextFieldContainerWidget(
+                hintText: "GST Registration Number",
+                iconData: Icons.numbers_sharp,
+                isMandatory: false,
+                onChange: _updateGST,
+                onValidate: FieldValidator.validateGstNumber,
+                savedText: widget.gstNumber),
             FileUploadWidget(
                 onUploadSuccess: _updateGSTFile, selectedFile: widget.gstFile),
           ]))),
@@ -87,8 +84,7 @@ class _DocumentUploadScreenWidgetState
           ), nextButtonWidget: NextButtonWidget(onButtonClicked: () {
             EventHelper.documentScreenNextButtonClicked(
                 registrationBloc, context, widget);
-          }))
-      );
+          })));
     });
   }
 

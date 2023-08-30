@@ -1,7 +1,6 @@
-import 'package:bizfra/bloc/registration_event.dart';
-import 'package:bizfra/models/business_model.dart';
 import 'package:bizfra/models/user_model.dart';
 import 'package:bizfra/widgets/autocomplete_txt_widget/AutoCompleteTextWidget.dart';
+import 'package:bizfra/widgets/container/autocomplete_container_widget.dart';
 import 'package:bizfra/widgets/textfield/text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +14,9 @@ import '../../validation/FieldValidator.dart';
 import '../buttons/back_button_widget.dart';
 import '../buttons/next_button_widget.dart';
 import '../container/container_widget.dart';
+import '../container/text_field_container_widget.dart';
 import '../header/header_title_padding_widget.dart';
+import '../header/header_widget.dart';
 import '../navigation/nav_bar_widget.dart';
 
 class BusinessDetailsScreenWidget extends StatefulWidget {
@@ -47,58 +48,53 @@ class _BusinessDetailsScreenWidgetState
       }
 
       return Scaffold(
+          appBar: const HeaderWidget(),
           body: Center(
               child: SingleChildScrollView(
                   child: Column(children: [
             const HeaderTitlePaddingWidget(headerTitle: 'Business Details'),
-            ContainerWidget(
-                widget: TextFieldWidget(
-                    hintText: "Organization Name",
-                    iconData: Icons.business_sharp,
-                    isMandatory: true,
-                    onChange: _updateOrgName,
-                    onValidate: FieldValidator.validateOrgNm,
-                    savedText: widget.orgName)),
-            ContainerWidget(
-                widget: AutoCompleteTextFieldWidget(
-                    iconData: Icons.business_sharp,
-                    isMandatory: true,
-                    suggestions: org_type_suggestions,
-                    hint: 'Organization Type',
-                    onChange: _updateOrgType,
-                    savedText: widget.orgType)),
-            ContainerWidget(
-                widget: AutoCompleteTextFieldWidget(
-                    iconData: Icons.business_sharp,
-                    isMandatory: true,
-                    suggestions: biz_expertise_suggestions,
-                    hint: 'Business Expertise',
-                    onChange: _updateExpertise,
-                    savedText: widget.expertise)),
-            ContainerWidget(
-                widget: TextFieldWidget(
-                    hintText: "Registered Address",
-                    iconData: Icons.home,
-                    isMandatory: true,
-                    onChange: _updateAddress,
-                    onValidate: FieldValidator.validateAddress,
-                    savedText: widget.address)),
-            ContainerWidget(
-                widget: TextFieldWidget(
-                    hintText: "Website",
-                    iconData: Icons.web,
-                    isMandatory: true,
-                    onChange: _updateWebsite,
-                    onValidate: FieldValidator.validateWebsite,
-                    savedText: widget.website)),
-            ContainerWidget(
-                widget: TextFieldWidget(
-                    hintText: "Number of Branches",
-                    iconData: Icons.numbers,
-                    isMandatory: true,
-                    onChange: _updatenumbranches,
-                    onValidate: FieldValidator.validateBranches,
-                    savedText: widget.noOfbranches))
+            TextFieldContainerWidget(
+                hintText: "Organization Name",
+                iconData: Icons.business_sharp,
+                isMandatory: true,
+                onChange: _updateOrgName,
+                onValidate: FieldValidator.validateOrgNm,
+                savedText: widget.orgName),
+            AutoCompleteTextFieldContainerWidget(
+                iconData: Icons.business_sharp,
+                isMandatory: true,
+                suggestions: org_type_suggestions,
+                hint: 'Organization Type',
+                onChange: _updateOrgType,
+                savedText: widget.orgType),
+            AutoCompleteTextFieldContainerWidget(
+                iconData: Icons.business_sharp,
+                isMandatory: true,
+                suggestions: biz_expertise_suggestions,
+                hint: 'Business Expertise',
+                onChange: _updateExpertise,
+                savedText: widget.expertise),
+            TextFieldContainerWidget(
+                hintText: "Registered Address",
+                iconData: Icons.home,
+                isMandatory: true,
+                onChange: _updateAddress,
+                onValidate: FieldValidator.validateAddress,
+                savedText: widget.address),
+            TextFieldContainerWidget(
+                hintText: "Website",
+                iconData: Icons.web,
+                isMandatory: true,
+                onChange: _updateWebsite,
+                onValidate: FieldValidator.validateWebsite,
+                savedText: widget.website),
+            TextFieldContainerWidget(
+                hintText: "Number of Branches",
+                iconData: Icons.numbers,
+                isMandatory: true,
+                onChange: _updatenumbranches,
+                onValidate: FieldValidator.validateBranches,
+                savedText: widget.noOfbranches)
           ]))),
           bottomNavigationBar:
               BottomNavBarWidget(backButtonWidget: BackButtonWidget(
@@ -108,8 +104,7 @@ class _BusinessDetailsScreenWidgetState
           ), nextButtonWidget: NextButtonWidget(onButtonClicked: () {
             EventHelper.businessScreenNextButtonClicked(
                 registrationBloc, context, widget);
-          }))
-      );
+          })));
     });
   }
 

@@ -15,7 +15,8 @@ class AutoCompleteTextFieldWidget extends StatefulWidget {
       required this.isMandatory,
       required this.iconData,
       required this.hint,
-      required this.onChange, this.savedText});
+      required this.onChange,
+      this.savedText});
 
   @override
   _AutoCompleteTextFieldState createState() => _AutoCompleteTextFieldState();
