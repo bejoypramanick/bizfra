@@ -3,8 +3,10 @@ import 'dart:typed_data';
 import 'package:bizfra/bloc/registration_state.dart';
 import 'package:bizfra/models/business_model.dart';
 import 'package:bizfra/models/documents_model.dart';
+import 'package:bizfra/models/id_model.dart';
 import 'package:bizfra/widgets/screens/capture_photo_screen.dart';
 import 'package:bizfra/widgets/screens/documents_upload_screen.dart';
+import 'package:bizfra/widgets/screens/id_screen_widget.dart';
 
 import '../models/photo_model.dart';
 import '../models/user_model.dart';
@@ -46,6 +48,15 @@ class ModelHelper {
     return documentModel;
   }
 
+  static IdModel populateIdModelFromWidget(IdScreenWidget widget) {
+    IdModel idModel = IdModel(
+      aadharNumber: widget.aadharNumber,
+      panNumber: widget.panNumber,
+      gstNumber: widget.gstNumber,
+    );
+    return idModel;
+  }
+
   static PhotoModel populatePhotoModelFromWidget(CameraWidget widget) {
     PhotoModel photoModel =
         PhotoModel(photoData: widget?.photoData ?? Uint8List(0));
@@ -56,11 +67,13 @@ class ModelHelper {
   BusinessModel? businessModel;
   DocumentsModel? documentsModel;
   PhotoModel? photoModel;
+  IdModel? idModel;
 
-  void populateUserModelFromState(BusinessRegistrationState state) {
+  void populateRegistrationModelFromState(BusinessRegistrationState state) {
     userModel = state.user;
     businessModel = state.business;
     documentsModel = state.documents;
     photoModel = state.photoModel;
+    idModel = state.idModel;
   }
 }

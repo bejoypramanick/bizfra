@@ -1,4 +1,5 @@
 // registration_event.dart
+import 'package:bizfra/models/id_model.dart';
 import 'package:bizfra/models/photo_model.dart';
 
 import '../models/business_model.dart';
@@ -23,6 +24,12 @@ class DocumentSubmittedEvent extends RegistrationEvent {
   final DocumentsModel documents;
 
   DocumentSubmittedEvent(this.documents);
+}
+
+class IdSubmittedEvent extends RegistrationEvent {
+  final IdModel ids;
+
+  IdSubmittedEvent(this.ids);
 }
 
 class PhotoTakenEvent extends RegistrationEvent {

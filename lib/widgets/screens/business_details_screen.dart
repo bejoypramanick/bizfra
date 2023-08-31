@@ -1,7 +1,5 @@
 import 'package:bizfra/models/user_model.dart';
-import 'package:bizfra/widgets/autocomplete_txt_widget/AutoCompleteTextWidget.dart';
 import 'package:bizfra/widgets/container/autocomplete_container_widget.dart';
-import 'package:bizfra/widgets/textfield/text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,7 +11,6 @@ import '../../helper/EventHelper.dart';
 import '../../validation/FieldValidator.dart';
 import '../buttons/back_button_widget.dart';
 import '../buttons/next_button_widget.dart';
-import '../container/container_widget.dart';
 import '../container/text_field_container_widget.dart';
 import '../header/header_title_padding_widget.dart';
 import '../header/header_widget.dart';

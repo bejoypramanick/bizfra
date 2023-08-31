@@ -32,7 +32,7 @@ class _SummaryDetailsScreenWidgetState
     return BlocBuilder<RegistrationBloc, RegistrationState>(
         builder: (context, state) {
       if (state is BusinessRegistrationState) {
-        modelHelper.populateUserModelFromState(state);
+        modelHelper.populateRegistrationModelFromState(state);
       }
       return Scaffold(
           appBar: const HeaderWidget(),
@@ -51,39 +51,41 @@ class _SummaryDetailsScreenWidgetState
                     ],
                     rows: [
                       DataTableHelper.buildDataRow(
-                          'First Name', modelHelper.userModel!.firstName),
+                          'First Name', modelHelper.userModel?.firstName),
                       DataTableHelper.buildDataRow(
-                          'Last Name', modelHelper.userModel!.lastName),
+                          'Last Name', modelHelper.userModel?.lastName),
                       DataTableHelper.buildDataRow(
-                          'Date of Birth', modelHelper.userModel!.dob),
+                          'Date of Birth', modelHelper.userModel?.dob),
                       DataTableHelper.buildDataRow(
-                          'Email', modelHelper.userModel!.email),
+                          'Email', modelHelper.userModel?.email),
                       DataTableHelper.buildDataRow(
-                          'Mobile', modelHelper.userModel!.mobile),
+                          'Mobile', modelHelper.userModel?.mobile),
                       DataTableHelper.buildDataRow('Organization Name',
-                          modelHelper.businessModel!.orgName),
+                          modelHelper.businessModel?.orgName),
                       DataTableHelper.buildDataRow('Organization Type',
-                          modelHelper.businessModel!.orgType),
+                          modelHelper.businessModel?.orgType),
                       DataTableHelper.buildDataRow('Business Expertise',
-                          modelHelper.businessModel!.expertise),
+                          modelHelper.businessModel?.expertise),
                       DataTableHelper.buildDataRow('Registered Address',
-                          modelHelper.businessModel!.address),
+                          modelHelper.businessModel?.address),
                       DataTableHelper.buildDataRow(
-                          'Website', modelHelper.businessModel!.website),
+                          'Website', modelHelper.businessModel?.website),
                       DataTableHelper.buildDataRow('Number of Branches',
-                          modelHelper.businessModel!.branches),
+                          modelHelper.businessModel?.branches),
                       DataTableHelper.buildDataRow('Aadhar Number',
-                          modelHelper.documentsModel!.aadharNumber),
+                          modelHelper.idModel?.aadharNumber),
                       DataTableHelper.buildDataRow(
-                          'Pan Number', modelHelper.documentsModel!.panNumber),
+                          'Pan Number', modelHelper.idModel?.panNumber),
                       DataTableHelper.buildDataRow(
-                          'GST Number', modelHelper.documentsModel!.gstNumber),
-                      DataTableHelper.buildDataRowForImage('Aadhar Image',
+                          'GST Number', modelHelper.idModel?.gstNumber),
+             /*         DataTableHelper.buildDataRowForImage('Aadhar Image',
                           modelHelper.documentsModel?.aadharFile),
                       DataTableHelper.buildDataRowForImage(
                           'PAN Image', modelHelper.documentsModel?.panFile),
                       DataTableHelper.buildDataRowForImage(
-                          'GST Image', modelHelper.documentsModel?.gstFile)
+                          'GST Image', modelHelper.documentsModel?.gstFile),*/
+                      DataTableHelper.buildTermsCheckbox()
+
                     ],
                   ),
                 ])),

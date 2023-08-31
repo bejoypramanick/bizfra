@@ -1,9 +1,11 @@
 import 'package:bizfra/bloc/registration_bloc.dart';
 import 'package:bizfra/models/business_model.dart';
 import 'package:bizfra/models/documents_model.dart';
+import 'package:bizfra/models/id_model.dart';
 import 'package:bizfra/models/photo_model.dart';
 import 'package:bizfra/widgets/screens/business_details_screen.dart';
 import 'package:bizfra/widgets/screens/documents_upload_screen.dart';
+import 'package:bizfra/widgets/screens/id_screen_widget.dart';
 import 'package:bizfra/widgets/screens/summary_screen.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -17,8 +19,7 @@ import 'ModelHelper.dart';
 // invokes event
 // navigates to next/previous screen
 class EventHelper {
-  static void userScreenNextButtonClicked(RegistrationBloc registrationBloc,
-      BuildContext context, UserDetailsScreenWidget widget) {
+  static void userScreenNextButtonClicked(RegistrationBloc registrationBloc, BuildContext context, UserDetailsScreenWidget widget) {
     UserModel userModel = ModelHelper.populateUserModelFromWidget(widget);
     registrationBloc.add(UserSubmittedEvent(userModel));
     Navigator.pushNamed(context, '/businessDetails');
@@ -29,16 +30,29 @@ class EventHelper {
     BusinessModel businessModel =
         ModelHelper.populateBusinessModelFromWidget(widget);
     registrationBloc.add(BusinessSubmittedEvent(businessModel));
-    Navigator.pushNamed(context, '/documentsUpload');
+  //  Navigator.pushNamed(context, '/documentsUpload');
+    Navigator.pushNamed(context, '/idUpload');
   }
 
   static void businessScreenBackButtonClicked(BuildContext context) {
     Navigator.pushNamed(context, '/userDetails');
   }
 
+  static void idScreenNextButtonClicked(RegistrationBloc registrationBloc,
+      BuildContext context, IdScreenWidget widget) {
+    IdModel idModel =
+    ModelHelper.populateIdModelFromWidget(widget);
+    registrationBloc.add(IdSubmittedEvent(idModel));
+    Navigator.pushNamed(context, '/photoUpload');
+  }
+
+  static void idScreenBackButtonClicked(BuildContext context) {
+    Navigator.pushNamed(context, '/businessDetails');
+  }
+
   static void documentScreenNextButtonClicked(RegistrationBloc registrationBloc,
       BuildContext context, DocumentUploadScreenWidget widget) {
-    DocumentsModel documentModel =
+      DocumentsModel documentModel =
         ModelHelper.populateDocumentModelFromWidget(widget);
     registrationBloc.add(DocumentSubmittedEvent(documentModel));
     Navigator.pushNamed(context, '/photoUpload');
@@ -56,7 +70,7 @@ class EventHelper {
   }
 
   static void photoScreenBackButtonClicked(BuildContext context) {
-    Navigator.pushNamed(context, '/documentsUpload');
+    Navigator.pushNamed(context, '/idUpload');
   }
 
   static void summaryScreenBackButtonClicked(BuildContext context) {
