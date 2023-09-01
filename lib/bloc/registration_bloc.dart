@@ -6,7 +6,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
   BusinessRegistrationState bizRegState = BusinessRegistrationState(
-      user: null, business: null, documents: null, photoModel: null, idModel: null);
+      user: null,
+      business: null,
+    //  documents: null,
+      photoModel: null,
+      idModel: null);
 
   RegistrationBloc() : super(RegistrationInitialState()) {
     on<UserSubmittedEvent>((event, emit) {
@@ -26,11 +30,11 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
       emit(bizRegState); // Emit the corresponding corresponding state
     });
 
-    on<DocumentSubmittedEvent>((event, emit) {
+  /*  on<DocumentSubmittedEvent>((event, emit) {
       // Handle document submission and emit state
       bizRegState = bizRegState.copyWith(documents: event.documents);
       emit(bizRegState); // Emit the corresponding state
-    });
+    });*/
     on<PhotoTakenEvent>((event, emit) {
       // Handle document submission and emit state
       bizRegState = bizRegState.copyWith(photoModel: event.photo);

@@ -1,8 +1,10 @@
 import 'package:bizfra/bloc/registration_bloc.dart';
+import 'package:bizfra/helper/HttpHelper.dart';
 import 'package:bizfra/models/business_model.dart';
 import 'package:bizfra/models/documents_model.dart';
 import 'package:bizfra/models/id_model.dart';
 import 'package:bizfra/models/photo_model.dart';
+import 'package:bizfra/models/registration_model.dart';
 import 'package:bizfra/widgets/screens/business_details_screen.dart';
 import 'package:bizfra/widgets/screens/documents_upload_screen.dart';
 import 'package:bizfra/widgets/screens/id_screen_widget.dart';
@@ -78,7 +80,10 @@ class EventHelper {
   }
 
   static void summaryScreenSubmitButtonClicked(
-      RegistrationBloc registrationBloc,
+      RegistrationModel registrationModel,
       BuildContext context,
-      SummaryDetailsScreenWidget widget) {}
+      SummaryDetailsScreenWidget widget) {
+
+    HttpHelper.submitData(registrationModel, '/register/organization');
+  }
 }

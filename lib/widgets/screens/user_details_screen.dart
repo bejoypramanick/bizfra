@@ -1,6 +1,5 @@
 import 'package:bizfra/bloc/registration_state.dart';
 import 'package:bizfra/widgets/buttons/back_button_widget.dart';
-import 'package:bizfra/widgets/textfield/text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,9 +7,7 @@ import '../../bloc/registration_bloc.dart';
 import '../../helper/EventHelper.dart';
 import '../../validation/FieldValidator.dart';
 import '../buttons/next_button_widget.dart';
-import '../calendar/calender_widget.dart';
 import '../container/calendar_container_widget.dart';
-import '../container/container_widget.dart';
 import '../container/text_field_container_widget.dart';
 import '../header/header_title_padding_widget.dart';
 import '../header/header_widget.dart';

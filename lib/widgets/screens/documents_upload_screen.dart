@@ -1,7 +1,6 @@
 import 'package:bizfra/bloc/registration_state.dart';
 import 'package:bizfra/validation/FieldValidator.dart';
 import 'package:bizfra/widgets/fileupload/file_upload_widget.dart';
-import 'package:bizfra/widgets/textfield/text_field_widget.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +9,6 @@ import '../../bloc/registration_bloc.dart';
 import '../../helper/EventHelper.dart';
 import '../buttons/back_button_widget.dart';
 import '../buttons/next_button_widget.dart';
-import '../container/container_widget.dart';
 import '../container/text_field_container_widget.dart';
 import '../header/header_title_padding_widget.dart';
 import '../header/header_widget.dart';
@@ -39,7 +37,7 @@ class _DocumentUploadScreenWidgetState
     return BlocBuilder<RegistrationBloc, RegistrationState>(
         builder: (context, state) {
       if (state is BusinessRegistrationState) {
-        _setDefaultValues(state);
+   //     _setDefaultValues(state);
       }
       return Scaffold(
           appBar: const HeaderWidget(),
@@ -112,12 +110,12 @@ class _DocumentUploadScreenWidgetState
     widget.gstFile = file!;
   }
 
-  void _setDefaultValues(BusinessRegistrationState state) {
+ /* void _setDefaultValues(BusinessRegistrationState state) {
     widget.aadharNumber = state.documents?.aadharNumber ?? "";
     widget.panNumber = state.documents?.panNumber ?? "";
     widget.gstNumber = state.documents?.gstNumber ?? "";
     widget.aadharFile = state.documents?.aadharFile;
     widget.panFile = state.documents?.panFile;
     widget.gstFile = state.documents?.gstFile;
-  }
+  }*/
 }

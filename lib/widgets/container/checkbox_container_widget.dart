@@ -1,7 +1,4 @@
-import 'package:bizfra/widgets/autocomplete_txt_widget/AutoCompleteTextWidget.dart';
 import 'package:flutter/material.dart';
-
-import '../textfield/text_field_widget.dart';
 
 class CheckboxContainerWidget extends StatefulWidget {
   const CheckboxContainerWidget({super.key});

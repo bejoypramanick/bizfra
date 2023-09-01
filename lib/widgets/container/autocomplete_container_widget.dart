@@ -1,8 +1,6 @@
 import 'package:bizfra/widgets/autocomplete_txt_widget/AutoCompleteTextWidget.dart';
 import 'package:flutter/material.dart';
 
-import '../textfield/text_field_widget.dart';
-
 class AutoCompleteTextFieldContainerWidget extends StatelessWidget {
   final List<String> suggestions;
   final bool isMandatory;

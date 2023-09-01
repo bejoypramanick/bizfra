@@ -12,4 +12,14 @@ class UserModel {
     required this.email,
     required this.mobile,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'firstName': firstName,
+      'lastName': lastName,
+      'dob': dob,
+      'email': email,
+      'mobile': mobile,
+    };
+  }
 }

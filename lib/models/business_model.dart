@@ -1,3 +1,4 @@
+
 class BusinessModel {
   final String orgName;
   final String orgType;
@@ -14,4 +15,15 @@ class BusinessModel {
     required this.branches,
     required this.website,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'orgName': orgName,
+      'orgType': orgType,
+      'expertise': expertise,
+      'address': address,
+      'branches': branches,
+      'website': website,
+    };
+  }
 }

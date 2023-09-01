@@ -4,6 +4,7 @@ import 'package:bizfra/bloc/registration_state.dart';
 import 'package:bizfra/models/business_model.dart';
 import 'package:bizfra/models/documents_model.dart';
 import 'package:bizfra/models/id_model.dart';
+import 'package:bizfra/models/registration_model.dart';
 import 'package:bizfra/widgets/screens/capture_photo_screen.dart';
 import 'package:bizfra/widgets/screens/documents_upload_screen.dart';
 import 'package:bizfra/widgets/screens/id_screen_widget.dart';
@@ -63,17 +64,9 @@ class ModelHelper {
     return photoModel;
   }
 
-  UserModel? userModel;
-  BusinessModel? businessModel;
-  DocumentsModel? documentsModel;
-  PhotoModel? photoModel;
-  IdModel? idModel;
 
+RegistrationModel? registrationModel;
   void populateRegistrationModelFromState(BusinessRegistrationState state) {
-    userModel = state.user;
-    businessModel = state.business;
-    documentsModel = state.documents;
-    photoModel = state.photoModel;
-    idModel = state.idModel;
+    registrationModel = RegistrationModel(business: state.business, idModel: state.idModel, photoModel: state.photoModel, user: state.user);
   }
 }
